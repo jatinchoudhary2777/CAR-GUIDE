@@ -1,0 +1,1465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GadiGuru — India's Ultimate Car Buying Playbook</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --bg:#080808;
+    --bg2:#111;
+    --bg3:#181818;
+    --card:#141414;
+    --card2:#1c1c1c;
+    --border:rgba(255,255,255,0.07);
+    --border2:rgba(255,255,255,0.14);
+    --orange:#FF6B1A;
+    --yellow:#FFD600;
+    --green:#00E070;
+    --red:#FF4757;
+    --blue:#4A9EFF;
+    --text:#F2F2F2;
+    --muted:#888;
+    --muted2:#555;
+    --radius:14px;
+    --radius-sm:8px;
+  }
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'DM Sans',sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    min-height:100vh;
+    overflow-x:hidden;
+  }
+
+  /* TYPOGRAPHY */
+  .bebas{font-family:'Bebas Neue',sans-serif;letter-spacing:0.02em}
+  .space{font-family:'Space Grotesk',sans-serif}
+
+  /* SCROLLBAR */
+  ::-webkit-scrollbar{width:6px}
+  ::-webkit-scrollbar-track{background:var(--bg)}
+  ::-webkit-scrollbar-thumb{background:#333;border-radius:3px}
+
+  /* NOISE TEXTURE overlay */
+  body::before{
+    content:'';position:fixed;inset:0;
+    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events:none;z-index:0;opacity:0.4
+  }
+
+  /* LAYOUT */
+  .container{max-width:1100px;margin:0 auto;padding:0 24px;position:relative;z-index:1}
+  section{padding:80px 0}
+
+  /* NAV */
+  nav{
+    position:sticky;top:0;z-index:100;
+    background:rgba(8,8,8,0.85);
+    backdrop-filter:blur(20px);
+    border-bottom:1px solid var(--border);
+    padding:14px 24px;
+  }
+  .nav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between}
+  .nav-logo{font-family:'Bebas Neue',sans-serif;font-size:26px;color:var(--orange);letter-spacing:0.05em}
+  .nav-logo span{color:var(--text)}
+  .nav-links{display:flex;gap:28px;list-style:none}
+  .nav-links a{color:var(--muted);text-decoration:none;font-size:14px;font-weight:500;transition:color 0.2s}
+  .nav-links a:hover{color:var(--text)}
+  .nav-badge{
+    background:var(--orange);color:#fff;
+    font-size:11px;font-weight:700;padding:5px 14px;border-radius:20px;
+    font-family:'Space Grotesk',sans-serif;letter-spacing:0.04em;text-transform:uppercase;
+  }
+
+  /* HERO */
+  .hero{
+    padding:120px 0 80px;
+    position:relative;overflow:hidden;
+  }
+  .hero-grid{
+    position:absolute;inset:0;
+    background-image:linear-gradient(rgba(255,107,26,0.04) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(255,107,26,0.04) 1px,transparent 1px);
+    background-size:60px 60px;
+    mask-image:radial-gradient(ellipse 80% 60% at 50% 0%,black,transparent);
+  }
+  .hero-tag{
+    display:inline-flex;align-items:center;gap:8px;
+    background:rgba(255,107,26,0.1);border:1px solid rgba(255,107,26,0.25);
+    color:var(--orange);border-radius:30px;padding:6px 16px;
+    font-size:13px;font-weight:600;font-family:'Space Grotesk',sans-serif;
+    text-transform:uppercase;letter-spacing:0.06em;margin-bottom:24px;
+  }
+  .hero-tag .dot{width:6px;height:6px;background:var(--orange);border-radius:50%;animation:pulse 2s infinite}
+  @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.5;transform:scale(1.3)}}
+  .hero h1{
+    font-family:'Bebas Neue',sans-serif;
+    font-size:clamp(64px,10vw,130px);
+    line-height:0.92;
+    letter-spacing:0.01em;
+    margin-bottom:8px;
+  }
+  .hero h1 .orange{color:var(--orange)}
+  .hero h1 .yellow{color:var(--yellow)}
+  .hero-sub{
+    font-size:clamp(18px,2.5vw,22px);
+    color:var(--muted);
+    margin:20px 0 36px;
+    max-width:580px;
+    line-height:1.5;
+  }
+  .hero-sub strong{color:var(--text)}
+  .hero-cta{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:14px 28px;border-radius:10px;
+    font-size:15px;font-weight:600;text-decoration:none;
+    cursor:pointer;border:none;transition:all 0.2s;
+    font-family:'Space Grotesk',sans-serif;
+  }
+  .btn-primary{
+    background:var(--orange);color:#fff;
+  }
+  .btn-primary:hover{background:#ff8040;transform:translateY(-1px)}
+  .btn-outline{
+    background:transparent;color:var(--text);
+    border:1px solid var(--border2);
+  }
+  .btn-outline:hover{background:var(--bg3);transform:translateY(-1px)}
+  .hero-stats{
+    display:flex;gap:40px;margin-top:56px;flex-wrap:wrap;
+  }
+  .hero-stat-num{
+    font-family:'Bebas Neue',sans-serif;font-size:40px;
+    color:var(--orange);line-height:1;
+  }
+  .hero-stat-label{font-size:13px;color:var(--muted);margin-top:4px}
+
+  /* SECTION HEADERS */
+  .section-tag{
+    display:inline-block;
+    color:var(--orange);font-size:12px;font-weight:700;
+    font-family:'Space Grotesk',sans-serif;text-transform:uppercase;letter-spacing:0.1em;
+    margin-bottom:12px;
+  }
+  .section-title{
+    font-family:'Bebas Neue',sans-serif;
+    font-size:clamp(42px,6vw,72px);
+    line-height:1;letter-spacing:0.01em;
+    margin-bottom:12px;
+  }
+  .section-desc{color:var(--muted);font-size:17px;max-width:560px;line-height:1.6}
+
+  /* DIVIDER */
+  .divider{
+    height:1px;background:linear-gradient(90deg,transparent,var(--border2),transparent);
+    margin:0;
+  }
+
+  /* ===== FUEL TYPE SECTION ===== */
+  .fuel-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:40px}
+  .fuel-card{
+    background:var(--card);border:1px solid var(--border);
+    border-radius:var(--radius);padding:28px 24px;
+    cursor:pointer;transition:all 0.25s;position:relative;overflow:hidden;
+  }
+  .fuel-card::before{
+    content:'';position:absolute;inset:0;opacity:0;
+    transition:opacity 0.25s;
+  }
+  .fuel-card:hover{border-color:var(--border2);transform:translateY(-3px)}
+  .fuel-card.active{border-color:var(--accent-color,var(--orange))}
+  .fuel-icon{font-size:32px;margin-bottom:16px}
+  .fuel-name{
+    font-family:'Bebas Neue',sans-serif;font-size:28px;
+    color:var(--accent-color,var(--text));
+    letter-spacing:0.02em;margin-bottom:8px;
+  }
+  .fuel-tagline{font-size:13px;color:var(--muted);margin-bottom:20px;font-weight:500}
+  .fuel-pros,.fuel-cons{list-style:none;font-size:13px;margin-bottom:8px}
+  .fuel-pros li::before{content:'✓ ';color:var(--green);font-weight:700}
+  .fuel-cons li::before{content:'✗ ';color:var(--red)}
+  .fuel-pros li,.fuel-cons li{margin-bottom:5px;line-height:1.4}
+  .fuel-verdict{
+    margin-top:18px;padding:10px 14px;border-radius:var(--radius-sm);
+    background:rgba(255,255,255,0.04);
+    font-size:12px;color:var(--muted);
+    border-left:3px solid var(--accent-color,var(--orange));
+  }
+  .fuel-verdict strong{color:var(--text)}
+
+  .petrol-card{--accent-color:#FF6B1A}
+  .diesel-card{--accent-color:#4A9EFF}
+  .cng-card{--accent-color:#00E070}
+  .ev-card{--accent-color:#FFD600}
+
+  /* ===== BUDGET SECTION ===== */
+  .budget-nav{
+    display:flex;gap:8px;flex-wrap:wrap;margin-bottom:32px;
+  }
+  .budget-btn{
+    padding:10px 20px;border-radius:30px;border:1px solid var(--border2);
+    background:transparent;color:var(--muted);font-size:14px;
+    font-weight:600;cursor:pointer;transition:all 0.2s;
+    font-family:'Space Grotesk',sans-serif;
+  }
+  .budget-btn:hover{color:var(--text);border-color:var(--orange)}
+  .budget-btn.active{background:var(--orange);color:#fff;border-color:var(--orange)}
+  .budget-content{display:none}
+  .budget-content.active{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
+  .car-card{
+    background:var(--card);border:1px solid var(--border);
+    border-radius:var(--radius);overflow:hidden;transition:all 0.25s;
+    position:relative;
+  }
+  .car-card:hover{border-color:var(--border2);transform:translateY(-4px)}
+  .car-card-header{
+    padding:20px 22px 16px;
+    border-bottom:1px solid var(--border);
+    display:flex;justify-content:space-between;align-items:flex-start;
+  }
+  .car-badge{
+    font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;
+    text-transform:uppercase;letter-spacing:0.06em;
+    font-family:'Space Grotesk',sans-serif;
+  }
+  .badge-hit{background:rgba(0,224,112,0.12);color:var(--green)}
+  .badge-hot{background:rgba(255,107,26,0.12);color:var(--orange)}
+  .badge-value{background:rgba(255,214,0,0.12);color:var(--yellow)}
+  .badge-smart{background:rgba(74,158,255,0.12);color:var(--blue)}
+  .car-name{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:0.02em;margin-bottom:4px}
+  .car-price{font-size:22px;font-weight:700;color:var(--orange);font-family:'Space Grotesk',sans-serif}
+  .car-price span{font-size:13px;color:var(--muted);font-weight:400}
+  .car-body{padding:18px 22px}
+  .car-spec-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
+  .car-spec{
+    background:var(--bg3);border-radius:var(--radius-sm);
+    padding:10px 12px;
+  }
+  .spec-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:3px;font-weight:600}
+  .spec-value{font-size:14px;font-weight:600;color:var(--text)}
+  .car-why{
+    font-size:13px;color:var(--muted);line-height:1.5;
+    border-top:1px solid var(--border);padding-top:14px;margin-top:4px;
+  }
+  .car-why strong{color:var(--orange)}
+  .our-pick{
+    position:absolute;top:0;right:16px;
+    background:var(--yellow);color:#000;
+    font-size:10px;font-weight:800;
+    padding:4px 10px;letter-spacing:0.08em;
+    font-family:'Space Grotesk',sans-serif;text-transform:uppercase;
+    border-radius:0 0 8px 8px;
+  }
+
+  /* ===== EMI CALCULATOR ===== */
+  .emi-wrapper{
+    background:var(--card);border:1px solid var(--border);
+    border-radius:20px;padding:40px;max-width:880px;margin-top:40px;
+  }
+  .emi-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px}
+  @media(max-width:700px){.emi-grid{grid-template-columns:1fr}}
+  .emi-label{font-size:13px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:8px;font-family:'Space Grotesk',sans-serif}
+  .emi-value{font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--orange);margin-bottom:4px}
+  input[type=range]{
+    -webkit-appearance:none;appearance:none;
+    width:100%;height:4px;border-radius:2px;
+    background:var(--bg3);outline:none;margin:12px 0 6px;
+    cursor:pointer;
+  }
+  input[type=range]::-webkit-slider-thumb{
+    -webkit-appearance:none;appearance:none;
+    width:18px;height:18px;border-radius:50%;
+    background:var(--orange);cursor:pointer;
+  }
+  input[type=range]::-moz-range-thumb{
+    width:18px;height:18px;border-radius:50%;
+    background:var(--orange);cursor:pointer;border:none;
+  }
+  .range-labels{display:flex;justify-content:space-between;font-size:11px;color:var(--muted2)}
+  .emi-result-box{
+    background:var(--bg);border:1px solid var(--border2);
+    border-radius:var(--radius);padding:28px;
+  }
+  .emi-monthly{
+    font-family:'Bebas Neue',sans-serif;
+    font-size:64px;color:var(--orange);line-height:1;margin-bottom:6px;
+  }
+  .emi-monthly-label{font-size:14px;color:var(--muted);margin-bottom:24px}
+  .emi-breakdown{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .emi-mini{
+    background:var(--card2);border-radius:var(--radius-sm);
+    padding:14px;
+  }
+  .emi-mini-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:4px}
+  .emi-mini-val{font-size:17px;font-weight:700;font-family:'Space Grotesk',sans-serif;color:var(--text)}
+  .emi-tip{
+    margin-top:20px;padding:12px 16px;
+    background:rgba(255,107,26,0.07);border:1px solid rgba(255,107,26,0.18);
+    border-radius:var(--radius-sm);font-size:13px;color:var(--muted);line-height:1.5;
+  }
+  .emi-tip strong{color:var(--orange)}
+
+  /* ===== CHECKLIST ===== */
+  .checklist-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;margin-top:40px}
+  .check-group{
+    background:var(--card);border:1px solid var(--border);
+    border-radius:var(--radius);padding:24px;
+  }
+  .check-group-title{
+    font-family:'Bebas Neue',sans-serif;font-size:22px;
+    color:var(--text);margin-bottom:16px;letter-spacing:0.02em;
+    display:flex;align-items:center;gap:10px;
+  }
+  .check-group-icon{font-size:20px}
+  .check-item{
+    display:flex;gap:12px;align-items:flex-start;
+    padding:10px 0;border-bottom:1px solid var(--border);
+    cursor:pointer;user-select:none;
+  }
+  .check-item:last-child{border-bottom:none}
+  .check-box{
+    width:18px;height:18px;border:1.5px solid var(--muted2);
+    border-radius:4px;flex-shrink:0;margin-top:2px;
+    display:flex;align-items:center;justify-content:center;
+    transition:all 0.15s;
+  }
+  .check-item.checked .check-box{
+    background:var(--green);border-color:var(--green);
+  }
+  .check-item.checked .check-box::after{content:'✓';font-size:11px;color:#000;font-weight:900}
+  .check-item.checked .check-text{color:var(--muted);text-decoration:line-through}
+  .check-text{font-size:14px;line-height:1.5}
+  .check-sub{font-size:12px;color:var(--muted);margin-top:2px}
+  .check-progress{
+    display:flex;align-items:center;gap:12px;margin-top:20px;
+    padding-top:16px;border-top:1px solid var(--border);
+  }
+  .progress-bar{flex:1;height:4px;background:var(--bg3);border-radius:2px;overflow:hidden}
+  .progress-fill{height:100%;background:var(--green);border-radius:2px;transition:width 0.3s;width:0%}
+  .progress-text{font-size:13px;font-weight:700;color:var(--green);font-family:'Space Grotesk',sans-serif;white-space:nowrap}
+
+  /* ===== INSURANCE ===== */
+  .insurance-tabs{display:flex;gap:0;margin-bottom:32px;border:1px solid var(--border);border-radius:10px;overflow:hidden;width:fit-content}
+  .ins-tab{
+    padding:10px 24px;background:transparent;border:none;
+    color:var(--muted);font-size:14px;font-weight:600;cursor:pointer;
+    transition:all 0.2s;font-family:'Space Grotesk',sans-serif;
+  }
+  .ins-tab.active{background:var(--orange);color:#fff}
+  .ins-content{display:none}
+  .ins-content.active{display:block}
+  .ins-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+  .ins-card{
+    background:var(--card);border:1px solid var(--border);
+    border-radius:var(--radius);padding:22px;
+  }
+  .ins-term{
+    font-family:'Bebas Neue',sans-serif;font-size:24px;
+    color:var(--yellow);margin-bottom:6px;letter-spacing:0.02em;
+  }
+  .ins-def{font-size:14px;color:var(--muted);line-height:1.6;margin-bottom:12px}
+  .ins-tip{
+    font-size:12px;color:var(--text);
+    background:rgba(255,214,0,0.06);border-left:3px solid var(--yellow);
+    padding:8px 12px;border-radius:0 6px 6px 0;
+  }
+
+  /* ===== RED FLAGS ===== */
+  .flags-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-top:40px}
+  .flag-card{
+    background:var(--card);border:1px solid rgba(255,71,87,0.18);
+    border-radius:var(--radius);padding:22px;
+    transition:all 0.2s;
+  }
+  .flag-card:hover{border-color:rgba(255,71,87,0.4);transform:translateY(-2px)}
+  .flag-icon{font-size:28px;margin-bottom:12px}
+  .flag-title{
+    font-family:'Space Grotesk',sans-serif;font-size:16px;
+    font-weight:700;color:var(--red);margin-bottom:8px;
+  }
+  .flag-desc{font-size:13px;color:var(--muted);line-height:1.6}
+  .flag-action{
+    margin-top:12px;font-size:12px;font-weight:600;color:var(--text);
+    font-family:'Space Grotesk',sans-serif;
+  }
+  .flag-action::before{content:'→ ';color:var(--orange)}
+
+  /* ===== INDIA-SPECIFIC ===== */
+  .india-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;margin-top:40px}
+  .india-card{
+    background:var(--card);border:1px solid var(--border);
+    border-radius:var(--radius);padding:26px;
+    border-top:3px solid var(--accent,var(--orange));
+  }
+  .india-icon{font-size:30px;margin-bottom:14px}
+  .india-title{
+    font-family:'Bebas Neue',sans-serif;font-size:22px;
+    margin-bottom:8px;letter-spacing:0.02em;
+  }
+  .india-body{font-size:13px;color:var(--muted);line-height:1.6}
+  .india-body strong{color:var(--text)}
+
+  /* ===== GLOSSARY ===== */
+  .gloss-search{
+    width:100%;padding:14px 20px;border-radius:10px;
+    background:var(--card);border:1px solid var(--border2);
+    color:var(--text);font-size:15px;font-family:'DM Sans',sans-serif;
+    outline:none;margin-bottom:24px;transition:border-color 0.2s;
+  }
+  .gloss-search:focus{border-color:var(--orange)}
+  .gloss-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+  .gloss-item{
+    background:var(--card);border:1px solid var(--border);
+    border-radius:var(--radius-sm);padding:16px 18px;
+    transition:border-color 0.2s;
+  }
+  .gloss-item:hover{border-color:var(--border2)}
+  .gloss-term{
+    font-weight:700;font-size:14px;color:var(--orange);
+    font-family:'Space Grotesk',sans-serif;margin-bottom:4px;
+  }
+  .gloss-desc{font-size:13px;color:var(--muted);line-height:1.5}
+  .gloss-hidden{display:none}
+
+  /* FOOTER */
+  .footer{
+    padding:48px 0;border-top:1px solid var(--border);
+    text-align:center;
+  }
+  .footer-logo{font-family:'Bebas Neue',sans-serif;font-size:36px;color:var(--orange);margin-bottom:8px}
+  .footer-tagline{color:var(--muted);font-size:14px;margin-bottom:20px}
+  .footer-disclaimer{font-size:11px;color:var(--muted2);max-width:600px;margin:0 auto;line-height:1.7}
+
+  /* SCROLL ANIMATIONS */
+  .fade-in{opacity:0;transform:translateY(20px);transition:opacity 0.5s ease,transform 0.5s ease}
+  .fade-in.visible{opacity:1;transform:translateY(0)}
+
+  /* UTILITY */
+  .text-orange{color:var(--orange)}
+  .text-yellow{color:var(--yellow)}
+  .text-green{color:var(--green)}
+  .text-muted{color:var(--muted)}
+  .mt-4{margin-top:4px}
+  .mt-8{margin-top:8px}
+  .mt-16{margin-top:16px}
+  .mt-24{margin-top:24px}
+  .fw-700{font-weight:700}
+
+  /* RESPONSIVE */
+  @media(max-width:768px){
+    nav{padding:12px 16px}
+    .nav-links{display:none}
+    .hero{padding:80px 0 60px}
+    section{padding:60px 0}
+    .emi-wrapper{padding:24px}
+    .hero-stats{gap:24px}
+  }
+
+  /* COMPARE TABLE */
+  .compare-table{width:100%;border-collapse:collapse;margin-top:32px;font-size:14px}
+  .compare-table th{
+    background:var(--bg3);color:var(--muted);
+    font-size:11px;text-transform:uppercase;letter-spacing:0.07em;
+    font-weight:700;font-family:'Space Grotesk',sans-serif;
+    padding:12px 16px;text-align:left;border-bottom:1px solid var(--border);
+  }
+  .compare-table td{
+    padding:13px 16px;border-bottom:1px solid var(--border);
+    color:var(--text);vertical-align:middle;
+  }
+  .compare-table tr:hover td{background:var(--bg3)}
+  .compare-table .yes{color:var(--green);font-weight:700}
+  .compare-table .no{color:var(--red)}
+  .compare-table .maybe{color:var(--yellow)}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">Gadi<span>Guru</span></div>
+    <ul class="nav-links">
+      <li><a href="#fuel">Fuel Types</a></li>
+      <li><a href="#budget">Budget Guide</a></li>
+      <li><a href="#emi">EMI Calc</a></li>
+      <li><a href="#checklist">Checklist</a></li>
+      <li><a href="#insurance">Insurance</a></li>
+      <li><a href="#usedcar">Used Cars</a></li>
+    </ul>
+    <span class="nav-badge">India Edition 2025</span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-grid"></div>
+  <div class="container">
+    <div class="hero-tag">
+      <span class="dot"></span>
+      The Only Car Guide You'll Ever Need
+    </div>
+    <h1 class="bebas">
+      GADI<span class="orange">GURU</span><br>
+      INDIA'S <span class="yellow">ULTIMATE</span><br>
+      CAR PLAYBOOK
+    </h1>
+    <p class="hero-sub">
+      No gatekeeping. No BS. Just <strong>real talk</strong> on buying your dream car in India —
+      from a fellow enthusiast who actually knows the difference between IDV and invoice price.
+    </p>
+    <div class="hero-cta">
+      <a href="#budget" class="btn btn-primary">Find My Car →</a>
+      <a href="#emi" class="btn btn-outline">Calculate EMI</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="hero-stat-num">40+</div>
+        <div class="hero-stat-label">Cars Reviewed</div>
+      </div>
+      <div>
+        <div class="hero-stat-num">7</div>
+        <div class="hero-stat-label">Budget Segments</div>
+      </div>
+      <div>
+        <div class="hero-stat-num">100%</div>
+        <div class="hero-stat-label">India-Specific</div>
+      </div>
+      <div>
+        <div class="hero-stat-num">0</div>
+        <div class="hero-stat-label">Paid Promotions</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- FUEL TYPE SECTION -->
+<section id="fuel">
+  <div class="container">
+    <div class="fade-in">
+      <div class="section-tag">Step 01 — Fuel Type</div>
+      <div class="section-title">WHAT'S YOUR<br>POISON?</div>
+      <p class="section-desc">Petrol, Diesel, CNG, or Electric? Each has a vibe. Pick what actually works for your life, not what your relatives say.</p>
+    </div>
+    <div class="fuel-cards fade-in">
+
+      <div class="fuel-card petrol-card">
+        <div class="fuel-icon">⛽</div>
+        <div class="fuel-name">Petrol</div>
+        <div class="fuel-tagline">The safe bet. Always has been.</div>
+        <ul class="fuel-pros">
+          <li>Lower upfront cost</li>
+          <li>Smoother driving, less vibration</li>
+          <li>Easy to maintain anywhere</li>
+          <li>Petrol pumps literally everywhere</li>
+        </ul>
+        <ul class="fuel-cons">
+          <li>Pricier per km than diesel/CNG</li>
+          <li>Not ideal above 1500 km/month</li>
+        </ul>
+        <div class="fuel-verdict"><strong>Best for:</strong> City driving, under 1200 km/month, first car buyers, anyone who doesn't wanna overthink it.</div>
+      </div>
+
+      <div class="fuel-card diesel-card">
+        <div class="fuel-icon">🛢️</div>
+        <div class="fuel-name">Diesel</div>
+        <div class="fuel-tagline">Highway king. Numbers don't lie.</div>
+        <ul class="fuel-pros">
+          <li>Best mileage for long drives</li>
+          <li>Torquey performance (esp. SUVs)</li>
+          <li>Lower fuel cost per km</li>
+        </ul>
+        <ul class="fuel-cons">
+          <li>Higher purchase price (₹1-2L gap)</li>
+          <li>Noisy at idle (some models)</li>
+          <li>Maintenance costlier</li>
+          <li>Not viable in NCR/some cities</li>
+        </ul>
+        <div class="fuel-verdict"><strong>Best for:</strong> Highway heavy-users, 2000+ km/month, SUV lovers. Break-even at ~60,000 km from petrol variant.</div>
+      </div>
+
+      <div class="fuel-card cng-card">
+        <div class="fuel-icon">💨</div>
+        <div class="fuel-name">CNG</div>
+        <div class="fuel-tagline">Budget savior. Truly no flex.</div>
+        <ul class="fuel-pros">
+          <li>Cheapest per km (₹1.5–2/km)</li>
+          <li>Great for high daily usage</li>
+          <li>Eco-friendly alternative</li>
+          <li>Many factory-fitted options now</li>
+        </ul>
+        <ul class="fuel-cons">
+          <li>Boot space eaten by CNG kit</li>
+          <li>CNG pumps still limited</li>
+          <li>Slightly lower power output</li>
+          <li>Queue at pumps (in some cities)</li>
+        </ul>
+        <div class="fuel-verdict"><strong>Best for:</strong> Ola/Uber drivers, daily 80-100 km commuters, metro city residents with nearby CNG pumps.</div>
+      </div>
+
+      <div class="fuel-card ev-card">
+        <div class="fuel-icon">⚡</div>
+        <div class="fuel-name">Electric</div>
+        <div class="fuel-tagline">The future is now, kinda.</div>
+        <ul class="fuel-pros">
+          <li>₹0.8–1.5/km running cost</li>
+          <li>Instant torque, fun to drive</li>
+          <li>No emissions, tax benefits</li>
+          <li>Charging infrastructure growing fast</li>
+        </ul>
+        <ul class="fuel-cons">
+          <li>Range anxiety still real</li>
+          <li>Long highway charging waits</li>
+          <li>High upfront price</li>
+          <li>Apartment charging still a pain</li>
+        </ul>
+        <div class="fuel-verdict"><strong>Best for:</strong> Bungalow/villa owners, short-range city commuters, tech-forward buyers, 2nd car in a household.</div>
+      </div>
+
+    </div>
+
+    <!-- Comparison table -->
+    <div class="fade-in" style="margin-top:48px;overflow-x:auto">
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>Parameter</th>
+            <th>⛽ Petrol</th>
+            <th>🛢️ Diesel</th>
+            <th>💨 CNG</th>
+            <th>⚡ Electric</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Avg. Cost/km</td><td>₹6–8</td><td>₹4–6</td><td>₹1.5–2.5</td><td>₹0.8–1.5</td></tr>
+          <tr><td>Purchase Premium</td><td>—</td><td class="maybe">+₹1–2L</td><td class="maybe">+₹80K–1.5L</td><td class="no">+₹5–15L</td></tr>
+          <tr><td>City Driving</td><td class="yes">Excellent</td><td class="maybe">Decent</td><td class="yes">Good</td><td class="yes">Excellent</td></tr>
+          <tr><td>Highway</td><td class="maybe">Good</td><td class="yes">Excellent</td><td class="maybe">Range limited</td><td class="maybe">Range anxiety</td></tr>
+          <tr><td>Maintenance Cost</td><td class="yes">Low</td><td class="maybe">Medium</td><td class="yes">Very Low</td><td class="yes">Very Low</td></tr>
+          <tr><td>Resale Value</td><td class="yes">Good</td><td class="maybe">Medium</td><td class="maybe">Medium</td><td class="maybe">Uncertain</td></tr>
+          <tr><td>NCR/BS6 Compliance</td><td class="yes">✓</td><td class="yes">✓ (BS6 only)</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- BUDGET SECTION -->
+<section id="budget" style="background:var(--bg2)">
+  <div class="container">
+    <div class="fade-in">
+      <div class="section-tag">Step 02 — Budget Navigator</div>
+      <div class="section-title">WHAT'S YOUR<br>BUDGET, BESTIE?</div>
+      <p class="section-desc">On-road price ranges. Because showroom price and on-road price hitting different is criminally under-discussed.</p>
+    </div>
+
+    <div class="budget-nav fade-in" style="margin-top:32px">
+      <button class="budget-btn active" onclick="showBudget('u5l',this)">Under ₹5L</button>
+      <button class="budget-btn" onclick="showBudget('5to8',this)">₹5–8L</button>
+      <button class="budget-btn" onclick="showBudget('8to12',this)">₹8–12L</button>
+      <button class="budget-btn" onclick="showBudget('12to18',this)">₹12–18L</button>
+      <button class="budget-btn" onclick="showBudget('18to25',this)">₹18–25L</button>
+      <button class="budget-btn" onclick="showBudget('25plus',this)">₹25L+</button>
+      <button class="budget-btn" onclick="showBudget('ev',this)">⚡ EV Picks</button>
+    </div>
+
+    <div id="u5l" class="budget-content active fade-in">
+      <div class="car-card">
+        <div class="our-pick">Our Pick</div>
+        <div class="car-card-header">
+          <div>
+            <div class="car-name">Maruti Alto K10</div>
+            <div class="car-price">₹3.99L <span>– ₹5.96L</span></div>
+          </div>
+          <span class="car-badge badge-hit">Best Seller</span>
+        </div>
+        <div class="car-body">
+          <div class="car-spec-grid">
+            <div class="car-spec"><div class="spec-label">Engine</div><div class="spec-value">1.0L Petrol</div></div>
+            <div class="car-spec"><div class="spec-label">Mileage</div><div class="spec-value">~24 km/L</div></div>
+            <div class="car-spec"><div class="spec-label">Segment</div><div class="spec-value">Hatchback</div></div>
+            <div class="car-spec"><div class="spec-label">Boot</div><div class="spec-value">214L</div></div>
+          </div>
+          <div class="car-why">The undisputed <strong>king of first cars</strong>. Cheap parts, any mechanic can fix it, ridiculous mileage. Not glamorous but she never lets you down.</div>
+        </div>
+      </div>
+      <div class="car-card">
+        <div class="car-card-header">
+          <div>
+            <div class="car-name">Renault Kwid</div>
+            <div class="car-price">₹4.70L <span>– ₹6.42L</span></div>
+          </div>
+          <span class="car-badge badge-value">Most Features</span>
+        </div>
+        <div class="car-body">
+          <div class="car-spec-grid">
+            <div class="car-spec"><div class="spec-label">Engine</div><div class="spec-value">0.8L / 1.0L</div></div>
+            <div class="car-spec"><div class="spec-label">Mileage</div><div class="spec-value">~22 km/L</div></div>
+            <div class="car-spec"><div class="spec-label">Segment</div><div class="spec-value">Hatchback</div></div>
+            <div class="car-spec"><div class="spec-label">Ground C.</div><div class="spec-value">180mm</div></div>
+          </div>
+          <div class="car-why">SUV-inspired styling at hatchback money. Gets a <strong>touchscreen even at base</strong>. High ground clearance eats Indian roads for breakfast.</div>
+        </div>
+      </div>
+      <div class="car-card">
+        <div class="car-card-header">
+          <div>
+            <div class="car-name">Maruti S-Presso</div>
+            <div class="car-price">₹4.26L <span>– ₹6.12L</span></div>
+          </div>
+          <span class="car-badge badge-hot">Gen Z Pick</span>
+        </div>
+        <div class="car-body">
+          <div class="car-spec-grid">
+            <div class="car-spec"><div class="spec-label">Engine</div><div class="spec-value">1.0L Petrol</div></div>
+            <div class="car-spec"><div class="spec-label">Mileage</div><div class="spec-value">~25 km/L</div></div>
+            <div class="car-spec"><div class="spec-label">Style</div><div class="spec-value">Mini SUV</div></div>
+            <div class="car-spec"><div class="spec-label">CNG</div><div class="spec-value">Available</div></div>
+          </div>
+          <div class="car-why">Tiny car, big drip. <strong>Micro-SUV vibes</strong> with the running cost of a hatchback. CNG variant gives insane mileage. The girlies love this one.</div>
+        </div>
+      </div>
+    </div>
+
+    <div id="5to8" class="budget-content fade-in">
+      <div class="car-card">
+        <div class="our-pick">Our Pick</div>
+        <div class="car-card-header">
+          <div><div class="car-name">Maruti Swift</div><div class="car-price">₹6.49L <span>– ₹9.64L</span></div></div>
+          <span class="car-badge badge-hit">Legend Status</span>
+        </div>
+        <div class="car-body">
+          <div class="car-spec-grid">
+            <div class="car-spec"><div class="spec-label">Engine</div><div class="spec-value">1.2L Z-Series</div></div>
+            <div class="car-spec"><div class="spec-label">Mileage</div><div class="spec-value">~25 km/L</div></div>
+            <div class="car-spec"><div class="spec-label">Safety</div><div class="spec-value">3-Star G-NCAP</div></div>
+            <div class="car-spec"><div class="spec-label">AMT</div><div class="spec-value">Available</div></div>
+          </div>
+          <div class="car-why">Arguably India's best hatchback. New Z-series engine is a <strong>serious glow-up</strong>. Great resale, killer fuel economy. The hatchback by which all others are judged.</div>
+        </div>
+      </div>
+      <div class="car-card">
+        <div class="car-card-header">
+          <div><div class="car-name">Tata Tiago</div><div class="car-price">₹5.59L <span>– ₹8.10L</span></div></div>
+          <span class="car-badge badge-smart">Safety King</span>
+        </div>
+        <div class="car-body">
+          <div class="car-spec-grid">
+            <div class="car-spec"><div class="spec-label">Engine</div><div class="spec-value">1.2L Revotron</div></div>
+            <div class="car-spec"><div class="spec-label">Safety</div><div class="spec-value">4-Star G-NCAP</div></div>
+            <div class="car-spec"><div class="spec-label">CNG</div><div class="spec-value">Available</div></div>
+            <div class="car-spec"><div class="spec-label">Warranty</div><div class="spec-value">3 yr/1.25L km</div></div>
+          </div>
+          <div class="car-why">4-star safety rating at this price is <strong>absolutely wild</strong>. Punches above its weight in build quality. Tata has earned its trust era.</div>
+        </div>
+      </div>
+      <div class="car-card">
+        <div class="car-card-header">
+          <div><div class="car-name">Hyundai Grand i10 Nios</div><div class="car-price">₹5.92L <span>– ₹8.66L</span></div></div>
+          <span class="car-badge badge-value">Feature Loaded</span>
+        </div>
+        <div class="car-body">
+          <div class="car-spec-grid">
+            <div class="car-spec"><div class="spec-label">Engine</div><div class="spec-value">1.2L Kappa</div></div>
+            <div class="car-spec"><div class="spec-label">Mileage</div><div class="spec-value">~21 km/L</div></div>
+            <div class="car-spec"><div class="spec-label">Infotainment</div><div class="spec-value">8" Screen</div></div>
+            <div class="car-spec"><div class="spec-label">Turbo</div><div class="spec-value">T-GDi option</div></div>
+          </div>
+          <div class="car-why">Premium cabin feel at sub-₹8L. The <strong>turbo variant goes surprisingly hard</strong>. Best-in-class interior quality in this segment.</div>
+        </div>
+      </div>
+    </div>
+
+    <div id="8to12" class="budget-content fade-in">
+      <div class="car-card">
+        <div class="our-pick">Our Pick</div>
+        <div class="car-card-header">
+          <div><div class="car-name">Hyundai Venue</div><div class="car-price">₹7.94L <span>– ₹13.28L</span></div></div>
+          <span class="car-badge badge-hot">Compact SUV</span>
+        </div>
+        <div class="car-body">
+          <div class="car-spec-grid">
+            <div class="car-spec"><div class="spec-label">Engine</div><div class="spec-value">1.2L / 1.0 Turbo</div></div>
+            <div class="car-spec"><div class="spec-label">Mileage</div><div class="spec-value">~18–20 km/L</div></div>
+            <div class="car-spec"><div class="spec-label">Connected Car</div><div class="spec-value">BlueLink</div></div>
+            <div class="car-spec"><div class="spec-label">Airbags</div><div class="spec-value">6</div></div>
+          </div>
+          <div class="car-why">SUV stance, hatchback budget. The <strong>1.0 Turbo iMT variant</strong> is a straight-up pocket rocket and the best pick here. Connected car features at this price is chef's kiss.</div>
+        </div>
+      </div>
+      <div class="car-card">
+        <div class="car-card-header">
+          <div><div class="car-name">Tata Nexon</div><div class="car-price">₹8.10L <span>– ₹15.50L</span></div></div>
+          <span class="car-badge badge-smart">5-Star Safety</span>
+        </div>
+        <div class="car-body">
+          <div class="car-spec-grid">
+            <div class="car-spec"><div class="spec-label">Safety</div><div class="spec-value">5-Star G-NCAP</div></div>
+            <div class="car-spec"><div class="spec-label">Engine</div><div class="spec-value">1.2T / 1.5D</div></div>
+            <div class="car-spec"><div class="spec-label">Design</div><div class="spec-value">Stunning</div></div>
+            <div class="car-spec"><div class="spec-label">EV Version</div><div class="spec-value">Available</div></div>
+          </div>
+          <div class="car-why">India's only 5-star compact SUV. Design went from mid to <strong>absolutely fire with the 2023 facelift</strong>. Solid build, great drives, trust the data not the aunties.</div>
+        </div>
+      </div>
+      <div class="car-card">
+        <div class="car-card-header">
+          <div><div class="car-name">Maruti Baleno</div><div class="car-price">₹6.61L <span>– ₹9.88L</span></div></div>
+          <span class="car-badge badge-value">Premium Hatch</span>
+        </div>
+        <div class="car-body">
+          <div class="car-spec-grid">
+            <div class="car-spec"><div class="spec-label">Mileage</div><div class="spec-value">~22–24 km/L</div></div>
+            <div class="car-spec"><div class="spec-label">Interior</div><div class="spec-value">All-new design</div></div>
+            <div class="car-spec"><div class="spec-label">HUD</div><div class="spec-value">Available</div></div>
+            <div class="car-spec"><div class="spec-label">Resale</div><div class="spec-value">Exceptional</div></div>
+          </div>
+          <div class="car-why">All-new 2022 Baleno genuinely slaps. HUD display, beautiful cabin, Maruti reliability. <strong>Heads-up Display in this budget?</strong> Say less.</div>
+        </div>
+      </div>
+    </div>
+
+    <div id="12to18" class="budget-content fade-in">
+      <div class="car-card">
+        <div class="our-pick">Our Pick</div>
+        <div class="car-card-header">
+          <div><div class="car-name">Hyundai Creta</div><div class="car-price">₹11.11L <span>– ₹20.45L</span></div></div>
+          <span class="car-badge badge-hit">Segment King</span>
+        </div>
+        <div class="car-body">
+          <div class="car-spec-grid">
+            <div class="car-spec"><div class="spec-label">Engine</div><div class="spec-value">1.5L / 1.6 Turbo</div></div>
+            <div class="car-spec"><div class="spec-label">Panoroof</div><div class="spec-value">Available</div></div>
+            <div class="car-spec"><div class="spec-label">Airbags</div><div class="spec-value">6</div></div>
+            <div class="car-spec"><div class="spec-label">ADAS</div><div class="spec-value">Available</div></div>
+          </div>
+          <div class="car-why">2024 Creta is absolutely electric (figuratively). Digital cockpit, ADAS, panoramic sunroof. <strong>The N-Line variant</strong> is the sleeper hit of 2024. Status car without the ₹40L bill.</div>
+        </div>
+      </div>
+      <div class="car-card">
+        <div class="car-card-header">
+          <div><div class="car-name">Kia Seltos</div><div class="car-price">₹10.90L <span>– ₹20.35L</span></div></div>
+          <span class="car-badge badge-hot">Design Icon</span>
+        </div>
+        <div class="car-body">
+          <div class="car-spec-grid">
+            <div class="car-spec"><div class="spec-label">Turbo</div><div class="spec-value">1.5L & 1.6L</div></div>
+            <div class="car-spec"><div class="spec-label">Screen</div><div class="spec-value">10.25" HD</div></div>
+            <div class="car-spec"><div class="spec-label">AWD</div><div class="spec-value">X-Line variant</div></div>
+            <div class="car-spec"><div class="spec-label">Warranty</div><div class="spec-value">3 yr/1L km</div></div>
+          </div>
+          <div class="car-why">Cooler-looking than the Creta, fight me. The <strong>GTX+ variant</strong> with 1.5 turbo DCT is one of the most fun-per-rupee cars in India right now.</div>
+        </div>
+      </div>
+      <div class="car-card">
+        <div class="car-card-header">
+          <div><div class="car-name">Maruti Grand Vitara</div><div class="car-price">₹10.70L <span>– ₹19.99L</span></div></div>
+          <span class="car-badge badge-value">Hybrid King</span>
+        </div>
+        <div class="car-body">
+          <div class="car-spec-grid">
+            <div class="car-spec"><div class="spec-label">Strong Hybrid</div><div class="spec-value">27.97 km/L</div></div>
+            <div class="car-spec"><div class="spec-label">AllGrip AWD</div><div class="spec-value">Available</div></div>
+            <div class="car-spec"><div class="spec-label">Source</div><div class="spec-value">Toyota tech</div></div>
+            <div class="car-spec"><div class="spec-label">Tax Benefit</div><div class="spec-value">Hybrid</div></div>
+          </div>
+          <div class="car-why">Strong hybrid at this price is <strong>genuinely insane value</strong>. Toyota's proven hybrid tech, nearly 28 km/L in city. Your fuel bills will disappear.</div>
+        </div>
+      </div>
+    </div>
+
+    <div id="18to25" class="budget-content fade-in">
+      <div class="car-card">
+        <div class="our-pick">Our Pick</div>
+        <div class="car-card-header">
+          <div><div class="car-name">Tata Harrier</div><div class="car-price">₹15.49L <span>– ₹26.44L</span></div></div>
+          <span class="car-badge badge-hit">Road Presence</span>
+        </div>
+        <div class="car-body">
+          <div class="car-spec-grid">
+            <div class="car-spec"><div class="spec-label">Engine</div><div class="spec-value">2.0L Kryotec</div></div>
+            <div class="car-spec"><div class="spec-label">ADAS Level</div><div class="spec-value">Level 2</div></div>
+            <div class="car-spec"><div class="spec-label">Pano Roof</div><div class="spec-value">Yes</div></div>
+            <div class="car-spec"><div class="spec-label">6-Airbags</div><div class="spec-value">Standard</div></div>
+          </div>
+          <div class="car-why">The new Harrier is a different beast. ADAS Level 2, ventilated seats, JBL speakers. <strong>Built like a tank, looks like concept art.</strong> Desi premium done right.</div>
+        </div>
+      </div>
+      <div class="car-card">
+        <div class="car-card-header">
+          <div><div class="car-name">MG Hector Plus</div><div class="car-price">₹14.73L <span>– ₹22.40L</span></div></div>
+          <span class="car-badge badge-smart">Feature Bomb</span>
+        </div>
+        <div class="car-body">
+          <div class="car-spec-grid">
+            <div class="car-spec"><div class="spec-label">Screen</div><div class="spec-value">14" Omni-Pro</div></div>
+            <div class="car-spec"><div class="spec-label">Seating</div><div class="spec-value">6/7 options</div></div>
+            <div class="car-spec"><div class="spec-label">i-SMART</div><div class="spec-value">1100+ cmds</div></div>
+            <div class="car-spec"><div class="spec-label">ADAS</div><div class="spec-value">Level 2</div></div>
+          </div>
+          <div class="car-why">14-inch tablet, because why not. The connected car tech here is from another dimension. <strong>Best tech-per-rupee</strong> in India. Ignore the China narrative, check the data.</div>
+        </div>
+      </div>
+      <div class="car-card">
+        <div class="car-card-header">
+          <div><div class="car-name">Honda City Hybrid</div><div class="car-price">₹19.51L <span>– ₹20.65L</span></div></div>
+          <span class="car-badge badge-value">Sedan Royalty</span>
+        </div>
+        <div class="car-body">
+          <div class="car-spec-grid">
+            <div class="car-spec"><div class="spec-label">Hybrid</div><div class="spec-value">e:HEV</div></div>
+            <div class="car-spec"><div class="spec-label">Mileage</div><div class="spec-value">26.5 km/L</div></div>
+            <div class="car-spec"><div class="spec-label">Refinement</div><div class="spec-value">Class-best</div></div>
+            <div class="car-spec"><div class="spec-label">Engine</div><div class="spec-value">1.5L Atkinson</div></div>
+          </div>
+          <div class="car-why">The most refined sedan under ₹25L. <strong>Honda's e:HEV hybrid</strong> is silky smooth, 26+ km/L, and has a cabin that embarrasses cars twice its price.</div>
+        </div>
+      </div>
+    </div>
+
+    <div id="25plus" class="budget-content fade-in">
+      <div class="car-card">
+        <div class="our-pick">Our Pick</div>
+        <div class="car-card-header">
+          <div><div class="car-name">Tata Safari</div><div class="car-price">₹16.19L <span>– ₹27.34L</span></div></div>
+          <span class="car-badge badge-hit">7-Seat Beast</span>
+        </div>
+        <div class="car-body">
+          <div class="car-spec-grid">
+            <div class="car-spec"><div class="spec-label">Engine</div><div class="spec-value">2.0L Kryotec</div></div>
+            <div class="car-spec"><div class="spec-label">Seating</div><div class="spec-value">6/7</div></div>
+            <div class="car-spec"><div class="spec-label">ADAS</div><div class="spec-value">Level 2</div></div>
+            <div class="car-spec"><div class="spec-label">Safety</div><div class="spec-value">5-Star (Euro)</div></div>
+          </div>
+          <div class="car-why">The new Safari <strong>brought the name justice finally</strong>. Massive cabin, premium feel, 5-star safety. Best family SUV under ₹30L. Full stop.</div>
+        </div>
+      </div>
+      <div class="car-card">
+        <div class="car-card-header">
+          <div><div class="car-name">Skoda Kushaq</div><div class="car-price">₹11.89L <span>– ₹19.89L</span></div></div>
+          <span class="car-badge badge-hot">Euro Build</span>
+        </div>
+        <div class="car-body">
+          <div class="car-spec-grid">
+            <div class="car-spec"><div class="spec-label">Platform</div><div class="spec-value">MQB-A0-IN</div></div>
+            <div class="car-spec"><div class="spec-label">DSG</div><div class="spec-value">Available</div></div>
+            <div class="car-spec"><div class="spec-label">Build</div><div class="spec-value">European</div></div>
+            <div class="car-spec"><div class="spec-label">Turbo</div><div class="spec-value">1.0L & 1.5L</div></div>
+          </div>
+          <div class="car-why">Czech engineering in India. The <strong>1.5 TSI DSG combo is absolutely rapid</strong>. Build quality that makes Japanese cars feel like toys. Different crowd, different vibe.</div>
+        </div>
+      </div>
+      <div class="car-card">
+        <div class="car-card-header">
+          <div><div class="car-name">Jeep Meridian</div><div class="car-price">₹29.90L <span>– ₹37.90L</span></div></div>
+          <span class="car-badge badge-smart">Off-Road King</span>
+        </div>
+        <div class="car-body">
+          <div class="car-spec-grid">
+            <div class="car-spec"><div class="spec-label">Engine</div><div class="spec-value">2.0L Diesel</div></div>
+            <div class="car-spec"><div class="spec-label">AWD</div><div class="spec-value">Active Drive</div></div>
+            <div class="car-spec"><div class="spec-label">Seating</div><div class="spec-value">7-seat</div></div>
+            <div class="car-spec"><div class="spec-label">4×4</div><div class="spec-value">Selec-Terrain</div></div>
+          </div>
+          <div class="car-why">If you actually go off-road and aren't just posturing, <strong>nothing touches the Meridian</strong>. The only true body-on-frame feeling in this price range (sorta).</div>
+        </div>
+      </div>
+    </div>
+
+    <div id="ev" class="budget-content fade-in">
+      <div class="car-card">
+        <div class="our-pick">Our Pick</div>
+        <div class="car-card-header">
+          <div><div class="car-name">Tata Nexon EV</div><div class="car-price">₹14.49L <span>– ₹19.49L</span></div></div>
+          <span class="car-badge badge-hit">Best-Seller EV</span>
+        </div>
+        <div class="car-body">
+          <div class="car-spec-grid">
+            <div class="car-spec"><div class="spec-label">Range</div><div class="spec-value">465 km (ARAI)</div></div>
+            <div class="car-spec"><div class="spec-label">Charging</div><div class="spec-value">50kW DC Fast</div></div>
+            <div class="car-spec"><div class="spec-label">0–100</div><div class="spec-value">~8.9 sec</div></div>
+            <div class="car-spec"><div class="spec-label">Safety</div><div class="spec-value">5-Star G-NCAP</div></div>
+          </div>
+          <div class="car-why">India's most loved EV for good reason. 5-star safety, 465 km range, <strong>Ziptron tech is proven and reliable</strong>. Enough chargers now to make range anxiety a non-issue in most cities.</div>
+        </div>
+      </div>
+      <div class="car-card">
+        <div class="car-card-header">
+          <div><div class="car-name">MG ZS EV</div><div class="car-price">₹18.98L <span>– ₹25.20L</span></div></div>
+          <span class="car-badge badge-smart">Feature Packed</span>
+        </div>
+        <div class="car-body">
+          <div class="car-spec-grid">
+            <div class="car-spec"><div class="spec-label">Range</div><div class="spec-value">461 km (WLTC)</div></div>
+            <div class="car-spec"><div class="spec-label">Battery</div><div class="spec-value">50.3 kWh</div></div>
+            <div class="car-spec"><div class="spec-label">Charging</div><div class="spec-value">76kW DC</div></div>
+            <div class="car-spec"><div class="spec-label">ADAS</div><div class="spec-value">Level 2</div></div>
+          </div>
+          <div class="car-why">The <strong>cabin feels properly premium</strong> and the sunroof is electric (pun intended). Great charging network support. Second most popular EV choice in India for a reason.</div>
+        </div>
+      </div>
+      <div class="car-card">
+        <div class="car-card-header">
+          <div><div class="car-name">Tata Punch EV</div><div class="car-price">₹10.99L <span>– ₹15.49L</span></div></div>
+          <span class="car-badge badge-value">Entry EV Star</span>
+        </div>
+        <div class="car-body">
+          <div class="car-spec-grid">
+            <div class="car-spec"><div class="spec-label">Range</div><div class="spec-value">421 km (Long)</div></div>
+            <div class="car-spec"><div class="spec-label">0–100</div><div class="spec-value">~9.5 sec</div></div>
+            <div class="car-spec"><div class="spec-label">Design</div><div class="spec-value">Mini SUV</div></div>
+            <div class="car-spec"><div class="spec-label">Ground C.</div><div class="spec-value">190mm</div></div>
+          </div>
+          <div class="car-why">Under ₹11L for an EV is genuinely historic. <strong>Best-value EV in India</strong> right now. 190mm ground clearance handles our roads without drama. This is the one.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- EMI CALCULATOR -->
+<section id="emi">
+  <div class="container">
+    <div class="fade-in">
+      <div class="section-tag">Step 03 — EMI Calculator</div>
+      <div class="section-title">NO MORE<br>MENTAL MATHS</div>
+      <p class="section-desc">Enter your numbers. Get your real monthly commitment. Because knowing your EMI is adulting 101.</p>
+    </div>
+
+    <div class="emi-wrapper fade-in">
+      <div class="emi-grid">
+        <div>
+          <div style="margin-bottom:28px">
+            <div class="emi-label">Car Price (On-Road)</div>
+            <div class="emi-value" id="price-val">₹10,00,000</div>
+            <input type="range" min="200000" max="8000000" step="50000" value="1000000" id="price-slider" oninput="calcEMI()">
+            <div class="range-labels"><span>₹2L</span><span>₹80L</span></div>
+          </div>
+
+          <div style="margin-bottom:28px">
+            <div class="emi-label">Down Payment</div>
+            <div class="emi-value" id="dp-val">₹2,00,000 (20%)</div>
+            <input type="range" min="10" max="50" step="5" value="20" id="dp-slider" oninput="calcEMI()">
+            <div class="range-labels"><span>10%</span><span>50%</span></div>
+          </div>
+
+          <div style="margin-bottom:28px">
+            <div class="emi-label">Loan Tenure</div>
+            <div class="emi-value" id="tenure-val">5 Years</div>
+            <input type="range" min="1" max="7" step="1" value="5" id="tenure-slider" oninput="calcEMI()">
+            <div class="range-labels"><span>1 yr</span><span>7 yrs</span></div>
+          </div>
+
+          <div>
+            <div class="emi-label">Interest Rate (p.a.)</div>
+            <div class="emi-value" id="rate-val">8.5%</div>
+            <input type="range" min="7" max="15" step="0.5" value="8.5" id="rate-slider" oninput="calcEMI()">
+            <div class="range-labels"><span>7%</span><span>15%</span></div>
+          </div>
+        </div>
+
+        <div>
+          <div class="emi-result-box">
+            <div class="emi-monthly" id="emi-result">₹0</div>
+            <div class="emi-monthly-label">Monthly EMI</div>
+            <div class="emi-breakdown">
+              <div class="emi-mini">
+                <div class="emi-mini-label">Loan Amount</div>
+                <div class="emi-mini-val" id="loan-amt">₹8,00,000</div>
+              </div>
+              <div class="emi-mini">
+                <div class="emi-mini-label">Total Interest</div>
+                <div class="emi-mini-val" id="total-int">₹0</div>
+              </div>
+              <div class="emi-mini">
+                <div class="emi-mini-label">Total Payout</div>
+                <div class="emi-mini-val" id="total-pay">₹0</div>
+              </div>
+              <div class="emi-mini">
+                <div class="emi-mini-label">Down Payment</div>
+                <div class="emi-mini-val" id="dp-show">₹2,00,000</div>
+              </div>
+            </div>
+            <div class="emi-tip" id="emi-advice">
+              <strong>GadiGuru tip:</strong> Keep your EMI under 15% of your monthly take-home. Above 20% and your lunch budget will suffer.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- INDIA-SPECIFIC SECTION -->
+<section style="background:var(--bg2)">
+  <div class="container">
+    <div class="fade-in">
+      <div class="section-tag">The Real India Stuff</div>
+      <div class="section-title">THINGS THAT<br>ACTUALLY MATTER</div>
+      <p class="section-desc">Stuff no YouTube reviewer tells you because they're too busy talking about 0-100 timings on a government road.</p>
+    </div>
+    <div class="india-grid fade-in">
+      <div class="india-card" style="--accent:var(--orange)">
+        <div class="india-icon">🛣️</div>
+        <div class="india-title">Ground Clearance</div>
+        <div class="india-body">Minimum <strong>165mm for city driving</strong>, 180mm+ for anything remotely non-urban. The pothole map of India is not the same as Germany. Never buy anything under 160mm without a dedicated parking spot and smooth colony roads.</div>
+      </div>
+      <div class="india-card" style="--accent:var(--yellow)">
+        <div class="india-icon">🌡️</div>
+        <div class="india-title">AC Performance</div>
+        <div class="india-body">India is not a temperate country. Check <strong>rear AC vents</strong> (not just a token vent, actual airflow), cooling capacity in 45°C heat, and sunroof insulation. Budget cars often have underpowered ACs — test drive in afternoon heat, not in the showroom's 22°C AC.</div>
+      </div>
+      <div class="india-card" style="--accent:var(--green)">
+        <div class="india-icon">🔧</div>
+        <div class="india-title">Service Network</div>
+        <div class="india-body">Maruti's 4500+ service centers are not an accident. Check if the brand has <strong>authorized service centers within 20 km</strong> of your home AND your parents' home. A great car stuck at an unfamiliar service center on a highway is a nightmare you don't want.</div>
+      </div>
+      <div class="india-card" style="--accent:var(--blue)">
+        <div class="india-icon">📋</div>
+        <div class="india-title">On-Road vs Ex-Showroom</div>
+        <div class="india-body">The gap is <strong>typically 12–18%</strong>. Includes: registration charges (varies by state), insurance (1st year mandatory), road tax, accessories, handling charges. Always ask for an on-road price quote — that's your real number. Never plan around ex-showroom price.</div>
+      </div>
+      <div class="india-card" style="--accent:var(--red)">
+        <div class="india-icon">🏙️</div>
+        <div class="india-title">NCR Diesel Rules</div>
+        <div class="india-body">Delhi-NCR has <strong>banned diesel vehicles over 10 years old</strong>. If you're buying diesel in NCR, factor this in — especially for used cars. BS4 diesel vehicles also face restrictions. Check your city's specific norms before going diesel.</div>
+      </div>
+      <div class="india-card" style="--accent:var(--yellow)">
+        <div class="india-icon">📱</div>
+        <div class="india-title">Connected Car Features</div>
+        <div class="india-body">Features like <strong>remote AC start, real-time tracking, OTA updates</strong> are actually useful here. Check if the connected car subscription is free for life or expires in 3 years (many do). Tata's iRA and Hyundai's BlueLink are currently best-in-class.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- USED CAR RED FLAGS -->
+<section id="usedcar">
+  <div class="container">
+    <div class="fade-in">
+      <div class="section-tag">Step 05 — Used Car Guide</div>
+      <div class="section-title">RED FLAGS<br>INCOMING 🚩</div>
+      <p class="section-desc">If you see any of these during a used car inspection, run. These are the exact things dealers hope you miss.</p>
+    </div>
+    <div class="flags-grid fade-in">
+      <div class="flag-card">
+        <div class="flag-icon">🎨</div>
+        <div class="flag-title">Paint Mismatch</div>
+        <div class="flag-desc">Shine a flashlight at panel joints. Different shades between panels = repainted after an accident. Check every panel individually — door edges, roof corners, under the bonnet.</div>
+        <div class="flag-action">Get it inspected by a panel beater, not a friend</div>
+      </div>
+      <div class="flag-card">
+        <div class="flag-icon">🔢</div>
+        <div class="flag-title">Odometer Tampering</div>
+        <div class="flag-desc">Wear on steering wheel, gear knob, and floor mats vs the odometer reading should match. A "20,000 km" car with a worn-out seat bolster is a red flag. Check service records for odometer history.</div>
+        <div class="flag-action">Get CARFAX/Vahaan verification done</div>
+      </div>
+      <div class="flag-card">
+        <div class="flag-icon">📄</div>
+        <div class="flag-title">RC & NOC Issues</div>
+        <div class="flag-desc">Make sure the RC matches the chassis number physically embossed on the car. If the car is from another state, get a No Objection Certificate (NOC) before buying — non-negotiable.</div>
+        <div class="flag-action">Check RC on Parivahan portal (parivahan.gov.in)</div>
+      </div>
+      <div class="flag-card">
+        <div class="flag-icon">💧</div>
+        <div class="flag-title">Flood-Damaged Cars</div>
+        <div class="flag-desc">Lift floor mats and check for watermarks or rust underneath. Check ECU and fuse box for water residue. Smell the AC vents for musty odour. Flood cars look fine outside but rot from inside.</div>
+        <div class="flag-action">Avoid cars from flood-prone cities after monsoon</div>
+      </div>
+      <div class="flag-card">
+        <div class="flag-icon">🔩</div>
+        <div class="flag-title">Misaligned Panels</div>
+        <div class="flag-desc">Stand behind the car and look at the gap between all body panels. Uneven gaps mean the car was in an accident and repaired. Even a "minor" repair means the structural geometry is altered.</div>
+        <div class="flag-action">Crouch down and eyeball all panel gaps</div>
+      </div>
+      <div class="flag-card">
+        <div class="flag-icon">🔋</div>
+        <div class="flag-title">Electrical Gremlins</div>
+        <div class="flag-desc">Check every single button — windows, mirrors, sunroof, AC blower speeds. Check dashboard for warning lights that someone might have taped over. Start the car cold to check smoke colour.</div>
+        <div class="flag-action">Blue smoke = oil burn. Black = rich fuel. Both = nope</div>
+      </div>
+      <div class="flag-card">
+        <div class="flag-icon">🏦</div>
+        <div class="flag-title">Loan Hypothecation</div>
+        <div class="flag-desc">If there's a bank name on the RC (hypothecation entry), the original owner may still have a loan. You could lose the car to the bank even after paying the seller. Always get NOC from the financier.</div>
+        <div class="flag-action">Hypothecation removal is mandatory before purchase</div>
+      </div>
+      <div class="flag-card">
+        <div class="flag-icon">📊</div>
+        <div class="flag-title">Overpriced "Inspected" Tags</div>
+        <div class="flag-desc">OLX Autos, Cars24, Spinny charge premiums for "certified" inspections. Their inspection is basic — get an independent third-party inspection done for ₹1,000-2,000. Money very well spent.</div>
+        <div class="flag-action">CarDekho or Spinny inspections ≠ mechanic inspection</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- BUY CHECKLIST -->
+<section id="checklist" style="background:var(--bg2)">
+  <div class="container">
+    <div class="fade-in">
+      <div class="section-tag">Step 04 — Pre-Buy Checklist</div>
+      <div class="section-title">THE ULTIMATE<br>CHECKLIST</div>
+      <p class="section-desc">Don't walk into a showroom or a used car lot without running this list. Every single item is there for a reason.</p>
+    </div>
+
+    <div class="checklist-grid fade-in">
+      <div class="check-group">
+        <div class="check-group-title"><span class="check-group-icon">🏎️</span>Test Drive Must-Dos</div>
+        <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div><div class="check-text">Drive at 80+ km/h on highway if possible</div><div class="check-sub">Check stability and wind noise</div></div></div>
+        <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div><div class="check-text">Test AC on max in parking for 5 min</div><div class="check-sub">Check cooling capacity for Indian heat</div></div></div>
+        <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div><div class="check-text">Drive over speed breakers slowly</div><div class="check-sub">Listen for suspension clunks</div></div></div>
+        <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div><div class="check-text">Hard brake from 60 km/h</div><div class="check-sub">Feel for ABS activation, straight tracking</div></div></div>
+        <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div><div class="check-text">Check all infotainment features</div><div class="check-sub">CarPlay, Android Auto, rear camera</div></div></div>
+        <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div><div class="check-text">Check rear seat comfort for adults</div><div class="check-sub">Headroom, legroom, and thigh support</div></div></div>
+        <div class="check-progress">
+          <div class="progress-bar"><div class="progress-fill" id="td-fill"></div></div>
+          <div class="progress-text" id="td-text">0/6</div>
+        </div>
+      </div>
+
+      <div class="check-group">
+        <div class="check-group-title"><span class="check-group-icon">📝</span>Documentation Check</div>
+        <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div><div class="check-text">Get written on-road price quote</div><div class="check-sub">Get all charges itemized in writing</div></div></div>
+        <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div><div class="check-text">Check waiting period honestly</div><div class="check-sub">Insist on a written delivery date</div></div></div>
+        <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div><div class="check-text">Read warranty terms carefully</div><div class="check-sub">What voids warranty? Extended warranty worth it?</div></div></div>
+        <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div><div class="check-text">Compare insurance quotes externally</div><div class="check-sub">Dealer insurance is almost always overpriced</div></div></div>
+        <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div><div class="check-text">Check free service periods</div><div class="check-sub">How many free services? What's included?</div></div></div>
+        <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div><div class="check-text">Confirm accessories don't affect warranty</div><div class="check-sub">Some accessories can void the warranty</div></div></div>
+        <div class="check-progress">
+          <div class="progress-bar"><div class="progress-fill" id="doc-fill"></div></div>
+          <div class="progress-text" id="doc-text">0/6</div>
+        </div>
+      </div>
+
+      <div class="check-group">
+        <div class="check-group-title"><span class="check-group-icon">💰</span>Finance & Negotiation</div>
+        <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div><div class="check-text">Get loan pre-approval before visiting dealer</div><div class="check-sub">Gives you leverage. Bargain from a position of power.</div></div></div>
+        <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div><div class="check-text">Compare at least 3 bank loan rates</div><div class="check-sub">SBI, HDFC, ICICI often beat dealer finance</div></div></div>
+        <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div><div class="check-text">Negotiate on accessories, not price</div><div class="check-sub">Dealers have more flexibility on accessories</div></div></div>
+        <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div><div class="check-text">Ask for corporate / bank discounts</div><div class="check-sub">Many employers have dealer tie-ups for cashback</div></div></div>
+        <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div><div class="check-text">Check exchange bonus if trading in old car</div><div class="check-sub">But get independent valuation first at CarDekho</div></div></div>
+        <div class="check-progress">
+          <div class="progress-bar"><div class="progress-fill" id="fin-fill"></div></div>
+          <div class="progress-text" id="fin-text">0/5</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- INSURANCE DECODED -->
+<section id="insurance">
+  <div class="container">
+    <div class="fade-in">
+      <div class="section-tag">Step 06 — Insurance</div>
+      <div class="section-title">INSURANCE<br>DECODED</div>
+      <p class="section-desc">Every term your dealer throws at you, explained without the jargon. Because getting ripped on insurance is the oldest trick in the book.</p>
+    </div>
+
+    <div class="insurance-tabs fade-in" style="margin-top:32px">
+      <button class="ins-tab active" onclick="showIns('terms',this)">Key Terms</button>
+      <button class="ins-tab" onclick="showIns('addons',this)">Add-ons Worth It</button>
+      <button class="ins-tab" onclick="showIns('tips',this)">Pro Tips</button>
+    </div>
+
+    <div id="terms" class="ins-content active fade-in">
+      <div class="ins-grid">
+        <div class="ins-card"><div class="ins-term">IDV</div><div class="ins-def">Insured Declared Value — the current market value of your car. This is the max you'll get if your car is stolen or totalled. Higher IDV = higher premium but better coverage.</div><div class="ins-tip">💡 Don't let dealers lower IDV to reduce premium. You'll regret it at claim time.</div></div>
+        <div class="ins-card"><div class="ins-term">NCB</div><div class="ins-def">No Claim Bonus — discount for not making a claim. Goes from 20% in Year 1 to 50% after 5 claim-free years. Most valuable asset in your insurance history.</div><div class="ins-tip">💡 Never make small claims. Lose NCB over a ₹5,000 scratch = lose ₹30,000+ over time.</div></div>
+        <div class="ins-card"><div class="ins-term">Third-Party</div><div class="ins-def">Legally mandatory in India. Covers damage to the other person/property but NOT your own car. Cheap but basically the bare minimum. Never enough by itself.</div><div class="ins-tip">💡 Mandatory by law. New cars get 3-year TP bundled. Never go without it.</div></div>
+        <div class="ins-card"><div class="ins-term">Comprehensive</div><div class="ins-def">Third-party + your own car damage (own damage/OD cover). This is what you actually need. Covers theft, natural disasters, accidents. Always get this.</div><div class="ins-tip">💡 Go comprehensive for any car under 10 years old. Full stop.</div></div>
+        <div class="ins-card"><div class="ins-term">Depreciation</div><div class="ins-def">By default, insurance pays you IDV minus depreciation on parts when you claim. That plastic bumper is depreciated at 50% after just 2 years. Ouch.</div><div class="ins-tip">💡 Zero-Dep add-on removes this pain. Worth it for the first 3 years minimum.</div></div>
+        <div class="ins-card"><div class="ins-term">Deductible</div><div class="ins-def">The amount you must pay before insurance kicks in. Compulsory deductible is fixed by IRDAI. Voluntary deductible reduces your premium but increases your out-of-pocket costs at claim time.</div><div class="ins-tip">💡 Don't take high voluntary deductibles just to save ₹500 annual premium.</div></div>
+      </div>
+    </div>
+
+    <div id="addons" class="ins-content">
+      <div class="ins-grid">
+        <div class="ins-card"><div class="ins-term">Zero Dep ✅</div><div class="ins-def">No depreciation deducted at claim. Absolutely worth it for new cars in the first 3 years. Cost: ₹2,000-5,000/year but saves massive at claims. Non-negotiable for new cars.</div></div>
+        <div class="ins-card"><div class="ins-term">RSA ✅</div><div class="ins-def">Roadside Assistance. Towing, flat tyre help, fuel delivery, battery jump-start. Especially useful in India where breakdowns in unfamiliar locations are genuinely stressful. Get it.</div></div>
+        <div class="ins-card"><div class="ins-term">Engine Protect ✅</div><div class="ins-def">Covers hydrostatic lock (engine damage from waterlogged roads). In monsoon India, this is NOT optional. One claim pays for 10 years of add-on cost. Buy it if you live in flood-prone cities.</div></div>
+        <div class="ins-card"><div class="ins-term">NCB Protect ✅</div><div class="ins-def">Allows one claim per year without losing your NCB. If you've built 40-50% NCB, this is precious. Losing NCB over a small claim is heartbreaking.</div></div>
+        <div class="ins-card"><div class="ins-term">Tyre Protect ⚠️</div><div class="ins-def">Covers tyre damage from road hazards. Maybe useful in extremely pothole-prone areas. Otherwise skip — tyre replacement rarely exceeds ₹6,000 and you don't want to waste a claim on it.</div></div>
+        <div class="ins-card"><div class="ins-term">Consumables ⚠️</div><div class="ins-def">Covers nuts, bolts, lubricants at repair time. Cheap add-on but rarely makes a significant difference. Nice to have if the cost is minimal, but not a priority.</div></div>
+      </div>
+    </div>
+
+    <div id="tips" class="ins-content">
+      <div class="ins-grid">
+        <div class="ins-card"><div class="ins-term">Buy Online</div><div class="ins-def">Never buy insurance from the dealer at delivery. You'll pay 20-40% more. Go to PolicyBazaar, Acko, or ICICI Lombard directly. Same coverage, way lower cost. This is the biggest single saving most new car buyers miss.</div></div>
+        <div class="ins-card"><div class="ins-term">NCR Transfer</div><div class="ins-def">If you're moving cities, transfer the NCB immediately with your new policy. The NCB certificate is yours personally, not tied to the car. Don't abandon 50% NCB when switching policies!</div></div>
+        <div class="ins-card"><div class="ins-term">Claim Timing</div><div class="ins-def">Don't claim for anything under ₹15,000-20,000 in the first 5 years. Protecting your NCB is worth more long-term. Calculate the math before raising a claim — it often doesn't make financial sense.</div></div>
+        <div class="ins-card"><div class="ins-term">Garage Network</div><div class="ins-def">Choose insurers with cashless garages near your home. ICICI Lombard and Bajaj Allianz have the widest networks. At claim time, cashless is dramatically less stressful than reimbursement.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- GLOSSARY -->
+<section style="background:var(--bg2)">
+  <div class="container">
+    <div class="fade-in">
+      <div class="section-tag">Bonus — Glossary</div>
+      <div class="section-title">EVERY TERM<br>EXPLAINED</div>
+      <p class="section-desc">From ABS to TPMS, no more nodding along at the showroom without knowing what they're saying.</p>
+    </div>
+    <div class="fade-in" style="margin-top:32px">
+      <input class="gloss-search" type="text" placeholder="Search a term... (try ABS, ADAS, torque)" oninput="filterGloss(this.value)">
+      <div class="gloss-grid" id="gloss-grid">
+        <div class="gloss-item"><div class="gloss-term">ABS</div><div class="gloss-desc">Anti-lock Braking System. Prevents wheels from locking during hard braking so you can still steer. Mandatory on all new cars in India since 2019.</div></div>
+        <div class="gloss-item"><div class="gloss-term">ADAS</div><div class="gloss-desc">Advanced Driver Assistance Systems. Includes lane-keep assist, collision warning, adaptive cruise control. Level 2 means it steers AND brakes automatically in limited scenarios.</div></div>
+        <div class="gloss-item"><div class="gloss-term">Torque</div><div class="gloss-desc">Rotational force. Think of it as pulling power — how well the car accelerates from low speeds. High torque at low RPM = better for city traffic and highway overtaking.</div></div>
+        <div class="gloss-item"><div class="gloss-term">BHP</div><div class="gloss-desc">Brake Horse Power. Top-end speed potential. More BHP = higher top speed potential. But for India, torque matters more than BHP in real-world driving.</div></div>
+        <div class="gloss-item"><div class="gloss-term">EBD</div><div class="gloss-desc">Electronic Brakeforce Distribution. Works with ABS to distribute braking force between front and rear wheels based on load. Makes braking more stable under heavy loads.</div></div>
+        <div class="gloss-item"><div class="gloss-term">ESP</div><div class="gloss-desc">Electronic Stability Program. Detects and prevents skidding by selectively braking individual wheels. Critical safety feature — check if it's standard, not an add-on.</div></div>
+        <div class="gloss-item"><div class="gloss-term">Hill Assist</div><div class="gloss-desc">Prevents the car from rolling back on a slope when you release the brake. Super useful in hilly cities like Shimla, Pune, Shillong. Often called HAC (Hill Assist Control).</div></div>
+        <div class="gloss-item"><div class="gloss-term">CVT</div><div class="gloss-desc">Continuously Variable Transmission. Smooth but can feel rubbery. Great for city traffic, less engaging on highways. Fuel efficient when driven gently.</div></div>
+        <div class="gloss-item"><div class="gloss-term">DCT</div><div class="gloss-desc">Dual-Clutch Transmission. Two clutches — one for odd gears, one for even. Lightning fast shifts. Used in performance-oriented automatics (Kia, Volkswagen, Hyundai). Can be jerky at very low speeds.</div></div>
+        <div class="gloss-item"><div class="gloss-term">AMT</div><div class="gloss-desc">Automated Manual Transmission. Cheap automat option popular in budget cars. Smooth at highway speeds, slightly jerky in stop-go traffic. Best way to get AT without spending much.</div></div>
+        <div class="gloss-item"><div class="gloss-term">BS6</div><div class="gloss-desc">Bharat Stage 6 emission standard. Equivalent to Euro 6. All cars sold in India since April 2020 must comply. BS6 Phase 2 with OBD-II is now mandatory from 2023.</div></div>
+        <div class="gloss-item"><div class="gloss-term">Ground Clearance</div><div class="gloss-desc">Distance between the lowest point of the car and the road. Higher = handles bumps, speed breakers, and flooding better. Critical spec for Indian roads. Check unladen clearance.</div></div>
+        <div class="gloss-item"><div class="gloss-term">ARAI Mileage</div><div class="gloss-desc">Lab test result under ideal conditions. Real-world mileage is typically 15-25% lower. Always mentally reduce ARAI claims. City driving is always worse than highway.</div></div>
+        <div class="gloss-item"><div class="gloss-term">Ex-Showroom</div><div class="gloss-desc">Base price without registration, insurance, and taxes. Never the price you'll actually pay. Add 12-18% to get a rough on-road estimate depending on your state.</div></div>
+        <div class="gloss-item"><div class="gloss-term">MG (G-NCAP)</div><div class="gloss-desc">Global New Car Assessment Programme (India). Independent safety rating from 0-5 stars. Most meaningful metric for safety — ignore brand claims and look up actual G-NCAP scores at safernewcars.com</div></div>
+        <div class="gloss-item"><div class="gloss-term">OBD Port</div><div class="gloss-desc">On-Board Diagnostics port (under dashboard). Mechanics plug in here to read error codes. You can buy a cheap Bluetooth OBD reader to read codes yourself with a free app.</div></div>
+        <div class="gloss-item"><div class="gloss-term">TPMS</div><div class="gloss-desc">Tyre Pressure Monitoring System. Alerts when any tyre is under-inflated. Mandatory on all new cars from April 2022. Saves tyres, improves fuel efficiency.</div></div>
+        <div class="gloss-item"><div class="gloss-term">OTA Updates</div><div class="gloss-desc">Over-The-Air software updates. Your car's software gets updated like your phone — wirelessly. Feature additions, bug fixes, improved performance. Tata, MG, Kia do this well.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-logo">GadiGuru</div>
+    <div class="footer-tagline">India's most no-BS car buying guide. By enthusiasts, for enthusiasts.</div>
+    <div style="display:flex;gap:12px;justify-content:center;margin-bottom:24px;flex-wrap:wrap">
+      <span style="color:var(--muted);font-size:13px">⛽ Petrol Guide</span>
+      <span style="color:var(--muted2)">·</span>
+      <span style="color:var(--muted);font-size:13px">🛢️ Diesel Guide</span>
+      <span style="color:var(--muted2)">·</span>
+      <span style="color:var(--muted);font-size:13px">⚡ EV Picks</span>
+      <span style="color:var(--muted2)">·</span>
+      <span style="color:var(--muted);font-size:13px">💰 EMI Calculator</span>
+      <span style="color:var(--muted2)">·</span>
+      <span style="color:var(--muted);font-size:13px">📋 Checklist</span>
+      <span style="color:var(--muted2)">·</span>
+      <span style="color:var(--muted);font-size:13px">🛡️ Insurance Guide</span>
+    </div>
+    <div class="footer-disclaimer">
+      GadiGuru India Edition 2025. All prices are approximate ex-showroom figures at time of writing and may vary by dealer, city, and time. Always verify current pricing directly with dealers. This guide is for informational purposes only and does not constitute financial advice.
+    </div>
+  </div>
+</footer>
+
+<script>
+// EMI Calculator
+function formatINR(n){return '₹'+Math.round(n).toLocaleString('en-IN')}
+function calcEMI(){
+  const price=parseInt(document.getElementById('price-slider').value);
+  const dpPct=parseInt(document.getElementById('dp-slider').value);
+  const tenure=parseInt(document.getElementById('tenure-slider').value);
+  const rate=parseFloat(document.getElementById('rate-slider').value);
+  const dp=price*(dpPct/100);
+  const loan=price-dp;
+  const r=rate/12/100;
+  const n=tenure*12;
+  const emi=loan*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1);
+  const totalPay=emi*n;
+  const totalInt=totalPay-loan;
+  document.getElementById('price-val').textContent=formatINR(price);
+  document.getElementById('dp-val').textContent=formatINR(dp)+' ('+dpPct+'%)';
+  document.getElementById('tenure-val').textContent=tenure+(tenure===1?' Year':' Years');
+  document.getElementById('rate-val').textContent=rate.toFixed(1)+'%';
+  document.getElementById('emi-result').textContent=formatINR(emi);
+  document.getElementById('loan-amt').textContent=formatINR(loan);
+  document.getElementById('total-int').textContent=formatINR(totalInt);
+  document.getElementById('total-pay').textContent=formatINR(totalPay);
+  document.getElementById('dp-show').textContent=formatINR(dp);
+  const tipEl=document.getElementById('emi-advice');
+  if(emi>100000)tipEl.innerHTML='<strong>Heads up:</strong> That\'s a serious EMI. Make sure your monthly income is at least ₹'+formatINR(emi*7)+' for financial breathing room.';
+  else if(emi<10000)tipEl.innerHTML='<strong>Looking clean!</strong> Affordable EMI. Consider bumping up down payment further to reduce total interest paid.';
+  else tipEl.innerHTML='<strong>GadiGuru tip:</strong> Keep your EMI under 15% of monthly take-home. Above 20% and your lunch budget suffers.';
+}
+calcEMI();
+
+// Budget toggle
+function showBudget(id,btn){
+  document.querySelectorAll('.budget-content').forEach(el=>el.classList.remove('active'));
+  document.querySelectorAll('.budget-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+
+// Insurance tabs
+function showIns(id,btn){
+  document.querySelectorAll('.ins-content').forEach(el=>el.classList.remove('active'));
+  document.querySelectorAll('.ins-tab').forEach(b=>b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+
+// Checklist
+function toggleCheck(item){
+  item.classList.toggle('checked');
+  updateProgress();
+}
+function updateProgress(){
+  const groups=[
+    {items:document.querySelectorAll('.check-group:nth-child(1) .check-item'),fill:'td-fill',text:'td-text'},
+    {items:document.querySelectorAll('.check-group:nth-child(2) .check-item'),fill:'doc-fill',text:'doc-text'},
+    {items:document.querySelectorAll('.check-group:nth-child(3) .check-item'),fill:'fin-fill',text:'fin-text'},
+  ];
+  groups.forEach(g=>{
+    const total=g.items.length;
+    const done=[...g.items].filter(i=>i.classList.contains('checked')).length;
+    const pct=total>0?Math.round((done/total)*100):0;
+    document.getElementById(g.fill).style.width=pct+'%';
+    document.getElementById(g.text).textContent=done+'/'+total;
+  });
+}
+
+// Glossary filter
+function filterGloss(q){
+  const items=document.querySelectorAll('.gloss-item');
+  const query=q.toLowerCase();
+  items.forEach(item=>{
+    const term=item.querySelector('.gloss-term').textContent.toLowerCase();
+    const desc=item.querySelector('.gloss-desc').textContent.toLowerCase();
+    item.style.display=(term.includes(query)||desc.includes(query))?'':'none';
+  });
+}
+
+// Scroll fade-in
+const obs=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}})
+},{threshold:0.1});
+document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
